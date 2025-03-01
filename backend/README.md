@@ -33,3 +33,33 @@ This endpoint registers a new user. It validates the input data, creates a user,
 
 ## Error Responses
 - **Status Code**: 400 Bad Request in case of validation errors.
+
+## /users/login Endpoint Documentation
+
+### Description
+This endpoint logs in an existing user. It validates the input, verifies credentials, and returns a JWT token along with the user object upon successful authentication.
+
+### Endpoint
+**POST** `/users/login`
+
+### Request Body
+- **email** (string, required): Must be a valid email address.
+- **password** (string, required): User's password.
+
+#### Example
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "secret123"
+}
+```
+
+### Response
+- **Status Code**: 200 OK
+- **Body**:
+  - **token**: JWT token for authentication.
+  - **user**: User object.
+
+### Error Responses
+- **Status Code**: 400 Bad Request for validation errors.
+- **Status Code**: 401 Unauthorized for invalid credentials.
