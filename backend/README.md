@@ -63,3 +63,39 @@ This endpoint logs in an existing user. It validates the input, verifies credent
 ### Error Responses
 - **Status Code**: 400 Bad Request for validation errors.
 - **Status Code**: 401 Unauthorized for invalid credentials.
+
+## /users/profile Endpoint Documentation
+
+### Description
+This endpoint retrieves the profile of the authenticated user.
+
+### Endpoint
+**GET** `/users/profile`
+
+### Request Headers
+- **Authorization**: Bearer token (required)
+
+### Response
+- **Status Code**: 200 OK
+- **Body**: User object.
+
+### Error Responses
+- **Status Code**: 401 Unauthorized if the user is not authenticated.
+
+## /users/logout Endpoint Documentation
+
+### Description
+This endpoint logs out the authenticated user by invalidating the JWT token.
+
+### Endpoint
+**GET** `/users/logout`
+
+### Request Headers
+- **Authorization**: Bearer token (required)
+
+### Response
+- **Status Code**: 200 OK
+- **Body**: Message indicating successful logout.
+
+### Error Responses
+- **Status Code**: 401 Unauthorized if the user is not authenticated.
