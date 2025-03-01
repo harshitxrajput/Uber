@@ -144,3 +144,69 @@ This endpoint registers a new captain. It validates the input data, creates a ca
 
 ### Error Responses
 - **Status Code**: 400 Bad Request in case of validation errors.
+
+## /captains/login Endpoint Documentation
+
+### Description
+This endpoint logs in an existing captain. It validates the input, verifies credentials, and returns a JWT token along with the captain object upon successful authentication.
+
+### Endpoint
+**POST** `/captains/login`
+
+### Request Body
+- **email** (string, required): Must be a valid email address.
+- **password** (string, required): Captain's password.
+
+#### Example
+```json
+{
+  "email": "jane.doe@example.com",
+  "password": "secret123"
+}
+```
+
+### Response
+- **Status Code**: 200 OK
+- **Body**:
+  - **token**: JWT token for authentication.
+  - **captain**: Captain object.
+
+### Error Responses
+- **Status Code**: 400 Bad Request for validation errors.
+- **Status Code**: 401 Unauthorized for invalid credentials.
+
+## /captains/profile Endpoint Documentation
+
+### Description
+This endpoint retrieves the profile of the authenticated captain.
+
+### Endpoint
+**GET** `/captains/profile`
+
+### Request Headers
+- **Authorization**: Bearer token (required)
+
+### Response
+- **Status Code**: 200 OK
+- **Body**: Captain object.
+
+### Error Responses
+- **Status Code**: 401 Unauthorized if the captain is not authenticated.
+
+## /captains/logout Endpoint Documentation
+
+### Description
+This endpoint logs out the authenticated captain by invalidating the JWT token.
+
+### Endpoint
+**GET** `/captains/logout`
+
+### Request Headers
+- **Authorization**: Bearer token (required)
+
+### Response
+- **Status Code**: 200 OK
+- **Body**: Message indicating successful logout.
+
+### Error Responses
+- **Status Code**: 401 Unauthorized if the captain is not authenticated.
