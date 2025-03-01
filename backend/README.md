@@ -99,3 +99,48 @@ This endpoint logs out the authenticated user by invalidating the JWT token.
 
 ### Error Responses
 - **Status Code**: 401 Unauthorized if the user is not authenticated.
+
+## /captains/register Endpoint Documentation
+
+### Description
+This endpoint registers a new captain. It validates the input data, creates a captain, and returns the captain object upon successful registration.
+
+### Endpoint
+**POST** `/captains/register`
+
+### Request Body
+- **fullname**: Object containing:
+  - **firstname** (string, required): Must be at least 3 characters.
+  - **lastname** (string, optional): If provided, should be at least 3 characters.
+- **email** (string, required): Must be a valid email address.
+- **password** (string, required): Must be at least 5 characters.
+- **vehicle**: Object containing:
+  - **color** (string, required): Must be at least 3 characters.
+  - **plate** (string, required): Must be at least 6 characters.
+  - **capacity** (number, required): Must be at least 1.
+  - **vehicleType** (string, required): Must be one of 'car', 'motorcycle', or 'auto'.
+
+#### Example
+```json
+{
+  "fullname": {
+    "firstname": "Jane",
+    "lastname": "Doe"
+  },
+  "email": "jane.doe@example.com",
+  "password": "secret123",
+  "vehicle": {
+    "color": "red",
+    "plate": "ABC1234",
+    "capacity": 4,
+    "vehicleType": "car"
+  }
+}
+```
+
+### Response
+- **Status Code**: 201 Created
+- **Body**: Created captain object.
+
+### Error Responses
+- **Status Code**: 400 Bad Request in case of validation errors.
