@@ -37,30 +37,21 @@ module.exports.getDistanceTime = async (origin, destination) => {
                 'Accept': 'application/json'
             }
         });
+        if (response.data.status === 'OK') {
 
-        if (response.data.status !== 'OK') {
-            throw new Error(`Google API error: ${response.data.status}`);
+            if (response.data.rows[0].elements[0].status === "ZERO_RESULTS") {
+                throw new Error("Route not found");
+            }
+
+            return response.data.rows[0].elements[0];
+        } else {
+            throw new Error("Unable to fetch distance and time");
         }
-
-        const element = response.data.rows[0].elements[0];
-
-        if (["ZERO_RESULTS", "NOT_FOUND"].includes(element.status)) {
-            throw new Error("Route not found or invalid location");
-        }
-
-        return {
-            distance: element.distance.text,
-            duration: element.duration.text,
-            distanceValue: element.distance.value,
-            durationValue: element.duration.value
-        };
-
     } catch (error) {
         console.error('Distance Matrix API Error:', error.message);
         throw new Error("Failed to calculate route");
     }
 }
-
 
 module.exports.getAutoCompleteSuggestions = async (input) => {
     if(!input){
